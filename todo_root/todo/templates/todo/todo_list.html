@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-do List</title>
+  </head>
+  <body>
+    <h1>To-do List</h1>
+    <a href="{% url 'todo_new' %}">작업 만들기</a>
+    <ul>
+      {% for todo in todos %}
+      <li>
+        <a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a>
+        <form
+          action="{% url 'todo_delete' todo.pk %}"
+          method="post"
+          style="display: inline"
+        >
+          {% csrf_token %}
+          <input type="submit" value="삭제" />
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
